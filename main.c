@@ -5,7 +5,7 @@
 #include <windows.h>
 
 char *replace(char *str) {
-    char *buff = (char *) malloc(sizeof(char *) * 512);
+/*    char *buff = (char *) malloc(sizeof(char *) * 512);
     char *po = buff;
     for (; *str != '\\'; ++str) {
         *po++ = *str;
@@ -14,7 +14,15 @@ char *replace(char *str) {
         free(buff);
         return NULL;
     }
-    char low = (char) tolower(*buff);
+    char low = (char) tolower(*buff);*/
+    if(str[1]!=':')
+    {
+        return NULL;
+    }
+    char low = (char) tolower(*str);
+    char *buff = (char *) malloc(sizeof(char *) * 512);
+    char *po;
+    str=&str[2];
     *buff = '\0';
     strcpy(buff, "\"/mnt/");
     for (po = buff; *po != '\0'; ++po);
