@@ -66,13 +66,12 @@ int withClipboard() {
     return EXIT_SUCCESS;
 }
 
-int main(int argc ,char *argv[]) {
-    opterr=0;
-    char LineArg= (char) getopt(argc, argv, "p:");
-    if (LineArg==-1) {
-        fprintf(stderr,"argument error");
-        return EXIT_FAILURE;
+int main(int argc, char *argv[]) {
+    opterr = 0;
+    char LineArg = (char) getopt(argc, argv, "p:");
+    if (LineArg == -1) {
+        return withClipboard();
     }
-    printf("%s",replace(optarg));
+    printf("%s", replace(optarg));
     return EXIT_SUCCESS;
 }
