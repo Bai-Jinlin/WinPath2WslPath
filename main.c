@@ -1,7 +1,8 @@
+#include <stdio.h>
+#include <unistd.h>
 #include <malloc.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdio.h>
 #include <windows.h>
 
 char *replace(char *str) {
@@ -15,14 +16,13 @@ char *replace(char *str) {
         return NULL;
     }
     char low = (char) tolower(*buff);*/
-    if(str[1]!=':')
-    {
+    if (str[1] != ':') {
         return NULL;
     }
     char low = (char) tolower(*str);
     char *buff = (char *) malloc(sizeof(char *) * 512);
     char *po;
-    str=&str[2];
+    str = &str[2];
     *buff = '\0';
     strcpy(buff, "\"/mnt/");
     for (po = buff; *po != '\0'; ++po);
@@ -39,7 +39,7 @@ char *replace(char *str) {
     return buff;
 }
 
-int main() {
+int withClipboard() {
     char *pBuf;
     if (OpenClipboard(NULL)) {
         if (IsClipboardFormatAvailable(CF_TEXT)) {
@@ -64,5 +64,15 @@ int main() {
     }
 
     return EXIT_SUCCESS;
+}
 
+int main(int argc ,char *argv[]) {
+    opterr=0;
+    char LineArg= (char) getopt(argc, argv, "p:");
+    if (LineArg==-1) {
+        fprintf(stderr,"argument error");
+        return EXIT_FAILURE;
+    }
+    printf("%s",replace(optarg));
+    return EXIT_SUCCESS;
 }
