@@ -5,25 +5,17 @@
 #include <ctype.h>
 #include <windows.h>
 
-char *replace(char *str) {
-/*    char *buff = (char *) malloc(sizeof(char *) * 512);
-    char *po = buff;
-    for (; *str != '\\'; ++str) {
-        *po++ = *str;
-    }
-    if (buff[1] != ':') {
-        free(buff);
-        return NULL;
-    }
-    char low = (char) tolower(*buff);*/
+char *replace(char *str)
+{
+    if (str == NULL) return NULL;
     if (str[1] != ':') {
         return NULL;
     }
     char low = (char) tolower(*str);
-    char *buff = (char *) malloc(sizeof(char *) * 512);
     char *po;
-    str = &str[2];
+    char *buff = (char *) malloc(sizeof(char *) * 512);
     *buff = '\0';
+    str = &str[2];
     strcpy(buff, "\"/mnt/");
     for (po = buff; *po != '\0'; ++po);
     *po++ = low;
@@ -39,7 +31,8 @@ char *replace(char *str) {
     return buff;
 }
 
-int withClipboard() {
+int withClipboard()
+{
     char *pBuf;
     if (OpenClipboard(NULL)) {
         if (IsClipboardFormatAvailable(CF_TEXT)) {
@@ -66,7 +59,8 @@ int withClipboard() {
     return EXIT_SUCCESS;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     opterr = 0;
     char LineArg = (char) getopt(argc, argv, "p:");
     if (LineArg == -1) {
